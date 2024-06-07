@@ -1,22 +1,29 @@
-function updateProd(el) {
-    product_id = el.value
-    fetch('/in_stock/' + product_id, {
-        method: 'patch',
+document.addEventListener("DOMContentLoaded", function() {
+    document.getElementById('add_step_btn').addEventListener('click', addStep);
+    document.getElementById('clear_steps_btn').addEventListener('click', clearSteps);
+});
+
+function addStep() {
+    let steps = document.getElementById('steps').value;
+    let date = document.getElementById('date').value;
+    fetch('/add_step', {
+        method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({'in_stock': el.checked})
-    })
-    console.log(product_id)
+        body: JSON.stringify({'steps': steps, 'date': date})
+    }).then(response => response.json()).then(data => {
+        if (data.status === 'success') {
+            location.reload();
+        }
+    });
 }
 
-function addProduct() {
-    let prodName = document.getElementById('prod_name').value
-    let price = document.getElementById('price').value
-    fetch('/add', {
-        method: 'post',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({'prod_name': prodName,
-                             'price': price,
-                             'in_stock': true})
-    })
-//    console.log("Add")
+function clearSteps() {
+    fetch('/clear_steps', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'}
+    }).then(response => response.json()).then(data => {
+        if (data.status === 'success') {
+            location.reload();
+        }
+    });
 }
