@@ -1,35 +1,36 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Best store!</title>
-    <script type="text/javascript" src="/static/update.js"></script>
-    <link href="static/store.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Steps Tracker</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='store.css') }}">
+    <script src="{{ url_for('static', filename='update.js') }}"></script>
 </head>
-
 <body>
-    <h1>Furniture store:</h1>
-    <h3>Add new product:</h3>
-    <form>
-        <div>
-            <input type="text" name="prod_name" id="prod_name">
-            <label for="prod_name">Product name</label>
+    <div class="container">
+        <h1>Steps Tracker</h1>
+        <div class="form-group">
+            <label for="steps">Количество шагов:</label><br>
+            <input type="number" id="steps" name="steps" required>
         </div>
-        <div>
-            <input type="number" name="price" id="price">
-            <label for="price">Price (rub.)</label>
+        <div class="form-group">
+            <label for="date">Дата:</label><br>
+            <input type="date" id="date" name="date" required>
         </div>
-        <button onClick="addProduct()">Add</button>
-    </form>
-    <ul>
-        {% for product in products_list %}
-        <li>
-            <div>
-                <div>{{ product['prod_name'] }}</div>
-                <div>{{ product['price'] }} rub.</div>
-                <input value="{{product['id']}}" onChange="updateProd(this)" name="in_stock" type="checkbox" {% if product.in_stock %} checked {% endif %}>
-                <label for="in_stock">In stock</label>
-            </div>
-        </li>
-        {% endfor %}
-    </ul>
+        <div class="form-group">
+            <button id="add_step_btn">Добавить</button>
+            <button id="clear_steps_btn">Очистить</button>
+        </div>
+        <div class="steps-list">
+            <h2>Записи шагов:</h2>
+            {% for step in steps %}
+                <div class="steps-item">
+                    <strong>Шаги:</strong> {{ step.steps }} | <strong>Дата:</strong> {{ step.date.strftime('%Y-%m-%d') }}
+                </div>
+            {% endfor %}
+        </div>
+        <h3>Общее количество шагов: {{ total_steps }}</h3>
+    </div>
 </body>
 </html>
