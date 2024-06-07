@@ -1,4 +1,48 @@
-li {
-    margin-bottom: 10px;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+}
+
+.form-group {
+    margin: 20px auto;
+    width: 300px;
+    text-align: center;
+}
+
+input[type="number"], input[type="date"] {
+    width: 100%;
     padding: 10px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.steps-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 20px auto;
+    width: 300px;
+}
+
+.steps-item {
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.steps-item:hover {
+    background-color: #f0f0f0;
 }
